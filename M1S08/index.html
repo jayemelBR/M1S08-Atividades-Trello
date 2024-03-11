@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="script.js">
+  <title> M1S08 Atividades Trello</title>
+  <style>
+    /* Estilo inicial */
+    .minhaClasse {
+      background-color: yellow;
+    }
+
+    .novaClasse {
+      color: blue;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #taskList {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .task {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .task input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+    <script src="index.js"></script>
+    <h2>Lista de Tarefas</h2>
+
+  <input type="text" id="newTask" placeholder="Adicionar nova tarefa">
+  <button onclick="addTask()">Adicionar</button>
+
+  <ul id="taskList"></ul>
+
+    <!-- Elemento pai -->
+  <div id="elementoPai">
+    <p>Este é um parágrafo existente.</p>
+  </div>
+
+   <!-- Elementos com a classe específica -->
+   <div class="minhaClasse">Elemento 1</div>
+   <div class="minhaClasse">Elemento 2</div>
+   <div class="minhaClasse">Elemento 3</div>
+ 
+  <!-- Seu elemento com um ID específico  e a classe especifica-->
+  <div id="meuElemento"class="minhaClasse">Este é o meu elemento</div>
+  
+  <script>
+   
+   function addTask() {
+      let taskInput = document.getElementById("newTask");
+      let taskList = document.getElementById("taskList");
+
+      if (taskInput.value.trim() === "") {
+        alert("Por favor, insira uma descrição para a tarefa.");
+        return;
+      }
+
+      let newTaskItem = document.createElement("li");
+      newTaskItem.className = "task";
+
+      let checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.addEventListener("change", toggleTaskStatus);
+
+      let taskDescription = document.createElement("span");
+      taskDescription.textContent = taskInput.value;
+
+      let removeButton = document.createElement("button");
+      removeButton.textContent = "Remover";
+      removeButton.addEventListener("click", removeTask);
+
+      newTaskItem.appendChild(checkbox);
+      newTaskItem.appendChild(taskDescription);
+      newTaskItem.appendChild(removeButton);
+
+      taskList.appendChild(newTaskItem);
+      taskInput.value = "";
+    }
+
+    function toggleTaskStatus(event) {
+      let taskItem = event.target.parentNode;
+      taskItem.classList.toggle("completed");
+    }
+
+    function removeTask(event) {
+      let taskItem = event.target.parentNode;
+      taskItem.parentNode.removeChild(taskItem);
+    }
+  </script>
+
+</body>
+</html>
